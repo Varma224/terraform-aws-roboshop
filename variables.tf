@@ -17,3 +17,7 @@ variable "zone_name" {
 variable "component" {
 
 }
+
+variable "rule_priority" {
+    
+}
