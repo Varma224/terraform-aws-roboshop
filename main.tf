@@ -63,7 +63,7 @@ resource "aws_ec2_instance_state" "main" {
 }
 
 resource "aws_ami_from_instance" "main" {
-  name               = "${var.project}-${var.environment}-catalogue"
+  name               = "${var.project}-${var.environment}-${var.component}"
   source_instance_id = aws_instance.main.id
   depends_on = [aws_ec2_instance_state.main]
   tags = merge(
@@ -191,6 +191,7 @@ resource "aws_autoscaling_policy" "main" {
 
 resource "aws_lb_listener_rule" "main" {
   listener_arn = local.alb_listener_arn
+  priority = var.rule_priority
 
   action {
     type             = "forward"
